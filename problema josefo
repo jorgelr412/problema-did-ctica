@@ -1,0 +1,25 @@
+n = int(input("Ingrese el número de participantes"))
+m = int(input("Ingrese el número de posiciones a la izquierda que matará cada participante"))
+
+vivos = []
+for i in range(n):
+    vivos.append(i + 1)
+
+turno = vivos[0]
+muerto = vivos[vivos.index(turno) + m]
+
+print(vivos)
+
+while len(vivos) > m:
+    print(f"el participante {turno} mata al participante {muerto}")
+    if muerto == max(vivos):
+        turno = vivos[0]
+    else:
+        turno = vivos[vivos.index(muerto) + 1]
+    vivos.remove(muerto)
+    if (vivos.index(turno) + m + 1) > len(vivos):
+        muerto = vivos[vivos.index(turno) + m - len(vivos)]
+    else:
+        muerto = vivos[vivos.index(turno) + m]
+print("El/los sobrevivientes son:")
+print(vivos)
